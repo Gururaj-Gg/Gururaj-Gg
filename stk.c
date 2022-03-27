@@ -1,68 +1,62 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define size 5
-int top=-1,stack[size];
-void push(int[],int);
-void display(int[]);
-void pop(int[]);
-void main()
+#define MAXSIZE 5
+int top=-1,stack[MAXSIZE],i,ele;
+void push();
+int pop();
+void display();
+void push()
 {
-int item,choice;
-while(1)
+if(top==MAXSIZE-1)
 {
-printf("\nenter stack operation:");
-printf("\n1.push\n2.pop\n3.display\n4.exit\n");
-printf("enter your choice:");
-scanf("%d",&choice);
-switch(choice)
-{
-case 1:printf("enter the item:");
-scanf("%d",&item);
-push(stack,item);
-break;
-case 2:pop(stack);
-break;
-case 3:display(stack);
-break;
-case 4:exit(0);
-break;
-default:printf("enter valid number");
-break;
+printf("full");
+exit(0);
 }
+stack[top++]=ele;
 }
-}
-void push(int stack[],int item)
+int pop()
 {
-if(top==size-1)
-{
-printf("stack full");
-return;
-}
-top++;
-stack[top]=item;
-}
-void pop(int stack[])
-{
-int ditem;
 if(top==-1)
 {
-printf("stack is empty");
+printf("empty");
+exit(0);
 }
-ditem=stack[top];
-top--;
-printf("item is deleted %d",ditem);
+ele=stack[top--];
 }
-void display(int stack[])
+void display()
 {
-int i;
 if(top==-1)
 {
-printf("stack is empty:\n");
-return;
+printf("empty");
 }
-printf("stack elements are");
+printf("elemen ts are");
 for(i=top;i>=0;i--)
 {
-printf(" %d",stack[i]);
+printf("%d",stack[i]);
 }
 }
+void main()
+{
+int ch,op=1;
+while(1)
+{
+printf("stack op\n");
+printf("\n1.push\n2.pop\n3.display\n4.exit\n");
+printf("enter your ch:");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:printf("enter ele to push:");
+	scanf("%d",&ele);
+	push(ele);
+	break;
+case 2:pop();
+	break;
+case 3:display();
+	break;	
+case 4:exit(0);
+ default:printf("vaild inp");
+ break;
+ }
+ }
+ }
